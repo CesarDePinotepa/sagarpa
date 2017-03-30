@@ -1,4 +1,5 @@
 <?php
+
 namespace Controller;
 
 /**
@@ -54,6 +55,7 @@ class User extends AdminController
         } else {
             //save
             unset($data['id']);
+            $data['password'] = md5('12345');
             $this->db->insert('usuario', $data);
             $id = $this->db->insert_id();
         }

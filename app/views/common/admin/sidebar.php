@@ -4,5 +4,6 @@
         <li><a href="<?php echo route("/admin/users"); ?>">Usuarios</a></li>
         <li><a href="<?php echo route("/admin/personal"); ?>">Personal</a></li>
         <li><a href="<?php echo route("/admin/candidato"); ?>">Candidato</a></li>
+        <li><a href="<?php echo route("/admin/programa"); ?>">Programa</a></li>
     </ul>
 </div>

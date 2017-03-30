@@ -62,6 +62,12 @@ $app->get('/admin/candidato/add', array('Controller\Candidato', "add"));
 $app->get('/admin/candidato/edit(/@id)', array('Controller\Candidato', "edit"));
 $app->post('/admin/candidato/save', array('Controller\Candidato', "save"));
 $app->any('/admin/candidato/delete(/@id)', array('Controller\Candidato', "delete"));
+//programa
+$app->get('/admin/programa', array('Controller\Programa', "index"));
+$app->get('/admin/programa/add', array('Controller\Programa', "add"));
+$app->get('/admin/programa/edit(/@id)', array('Controller\Programa', "edit"));
+$app->post('/admin/programa/save', array('Controller\Programa', "save"));
+$app->any('/admin/programa/delete(/@id)', array('Controller\Programa', "delete"));
 
 $app->run();
 ?>

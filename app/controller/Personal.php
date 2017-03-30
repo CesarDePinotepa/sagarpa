@@ -12,7 +12,6 @@ class Personal extends AdminController
 {
     public function index()
     {
-        $this->db->arrayForSelect('personal', 'nombre');
         $records = $this->db->get('personal')->results();
         render('admin/personal/list', compact('records'));
     }

@@ -15,14 +15,14 @@
                     <td> <?php echo $record->rfc; ?></td>
                     <td> <?php echo $record->curp; ?></td>
                     <td><?php
-                        switch ($record->puesto) {
-                            case 'j': {
-                                echo "Jefe de Oficina";
+                        switch ($record->tipo_persona) {
+                            case 'f': {
+                                echo "Física";
                                 break;
                             }
 
-                            case 't': {
-                                echo "Técnico";
+                            case 'm': {
+                                echo "Moral";
                                 break;
                             }
                         }

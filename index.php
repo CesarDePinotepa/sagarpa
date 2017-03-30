@@ -56,6 +56,12 @@ $app->get('/admin/personal/add', array('Controller\Personal', "add"));
 $app->get('/admin/personal/edit(/@id)', array('Controller\Personal', "edit"));
 $app->post('/admin/personal/save', array('Controller\Personal', "save"));
 $app->any('/admin/personal/delete(/@id)', array('Controller\Personal', "delete"));
+//candidato
+$app->get('/admin/candidato', array('Controller\Candidato', "index"));
+$app->get('/admin/candidato/add', array('Controller\Candidato', "add"));
+$app->get('/admin/candidato/edit(/@id)', array('Controller\Candidato', "edit"));
+$app->post('/admin/candidato/save', array('Controller\Candidato', "save"));
+$app->any('/admin/candidato/delete(/@id)', array('Controller\Candidato', "delete"));
 
 $app->run();
 ?>

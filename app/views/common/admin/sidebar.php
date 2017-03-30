@@ -3,5 +3,6 @@
         <li class="<!--active-->"><a href="<?php echo route("/admin"); ?>">Inicio</a></li>
         <li><a href="<?php echo route("/admin/users"); ?>">Usuarios</a></li>
         <li><a href="<?php echo route("/admin/personal"); ?>">Personal</a></li>
+        <li><a href="<?php echo route("/admin/candidato"); ?>">Candidato</a></li>
     </ul>
 </div>

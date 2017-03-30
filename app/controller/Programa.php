@@ -35,7 +35,9 @@ class Programa extends AdminController
     public function index()
     {
         $records = $this->db->get('programa')->results();
-        render('admin/programa/list', compact('records'));
+        $tipos = $this->tipos;
+        $tipoPersonas = $this->tipoPersonas;
+        render('admin/programa/list', compact('records', 'tipos', 'tipoPersonas'));
     }
 
     public function delete($id)

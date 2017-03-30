@@ -31,8 +31,22 @@
             <div class="col-sm-6">
                 <div class="form-group">
                     <label>Convocatoria:</label>
-                    <input name="convocatoria" type="file" placeholder="Enter email" class="form-control"
-                           accept=".pdf, .application/pdf, .doc, .docx, .application/msword">
+                    <?php if (!empty($model->convocatoria)): ?>
+                        <div class="input-group">
+                            <input name="convocatoria" type="file" placeholder="Enter email" class="form-control"
+                                   accept=".pdf, .application/pdf, .doc, .docx, .application/msword">
+                            <span class="input-group-btn">
+                            <a target="_blank"
+                               href="<?php echo asset('upload/convocatoria/' . $model->convocatoria); ?>"
+                               class="btn btn-default"
+                               type="button">Ver fichero!</a>
+                        </span>
+                        </div>
+                    <?php else: ?>
+                        <input name="convocatoria" type="file" placeholder="Enter email" class="form-control"
+                               accept=".pdf, .application/pdf, .doc, .docx, .application/msword">
+                    <?php endif; ?>
+
                 </div>
                 <div class="row">
                     <div class="col-sm-6">

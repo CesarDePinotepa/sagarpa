@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 100119
 File Encoding         : 65001
 
-Date: 2017-03-30 11:59:07
+Date: 2017-03-30 13:54:44
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -53,13 +53,14 @@ CREATE TABLE `candidato` (
   `apellido1` varchar(15) NOT NULL,
   `apellido2` varchar(15) NOT NULL,
   `nombre` varchar(15) NOT NULL,
-  `comentario` text,
+  `direccion` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of candidato
 -- ----------------------------
+INSERT INTO `candidato` VALUES ('1', 'asd', 'asd', 'm', 'sdada', 'sdas', 'zzzzzzzzzzzzzzz', 'dasdasd');
 
 -- ----------------------------
 -- Table structure for componente
@@ -112,14 +113,16 @@ CREATE TABLE `programa` (
   `tipo_persona` char(1) NOT NULL,
   `convocatoria` varchar(45) NOT NULL,
   `cantidad` int(11) NOT NULL,
-  `monto` int(11) DEFAULT NULL,
+  `monto` decimal(11,2) DEFAULT NULL,
   `beneficio` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of programa
 -- ----------------------------
+INSERT INTO `programa` VALUES ('1', 'as', 'd', 'a', 'asdasd', '21231344', '0.57', 'asdasd');
+INSERT INTO `programa` VALUES ('2', 'asdasdasd', 'a', 'f', 'zadeh19881.pdf', '34', '55.00', 'asdasdasd');
 
 -- ----------------------------
 -- Table structure for requisito

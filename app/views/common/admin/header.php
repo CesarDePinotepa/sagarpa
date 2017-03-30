@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clinic</title>
+    <title>SAGARPA</title>
     <link href="<?php echo asset("css/bootstrap.min.css"); ?>" rel="stylesheet">
     <link href="<?php echo asset("css/style.css"); ?>" rel="stylesheet">
 </head>

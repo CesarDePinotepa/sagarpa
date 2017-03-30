@@ -1,4 +1,5 @@
 <?php
+
 namespace Controller;
 
 /**
@@ -11,6 +12,7 @@ class Personal extends AdminController
 {
     public function index()
     {
+        $this->db->arrayForSelect('personal', 'nombre');
         $records = $this->db->get('personal')->results();
         render('admin/personal/list', compact('records'));
     }
@@ -45,9 +47,8 @@ class Personal extends AdminController
         $id = $this->request->data->id;
 
         $data = $this->request->data->only(array(
-            'id', 'rfc', 'apaterno', 'amaterno', 'nombre',
-            'direccion', 'telefono', 'edoCivil', 'tipo', 'especialidad',
-            'escuela', 'experiencia'
+            'id', 'rfc', 'apellido1', 'apellido2', 'nombre',
+            'curp', 'puesto', 'direccion'
         ));
         if (isset($id) && !empty($id)) {
             //update

@@ -21,7 +21,7 @@ class Profile extends AdminController
         $data = $this->request->data->only(array(
             'nombre', 'apellidos', 'email'//, 'password'
         ));
-        $this->db->where('id', $model->id)->update('usuarios', $data);
+        $this->db->where('id', $model->id)->update('usuario', $data);
         $this->flash->success("Su perfil fue actualizado");
         $this->url->redirect('/admin/profile');
 
@@ -53,7 +53,7 @@ class Profile extends AdminController
             'passwordrecovery' => null,
             'password' => md5($pass)
         );
-        app()->db->where('id', $user->id)->update('usuarios', $data);
+        app()->db->where('id', $user->id)->update('usuario', $data);
         $this->flash->success("Su contraseña fue cambiada correctamente");
         $this->url->redirect('/admin');
     }

@@ -21,7 +21,7 @@ $app->register('db', 'Db', array(
         'db_host' => 'localhost',
         'db_user' => 'root',
         'db_pass' => '',
-        'db_name' => 'clinic',
+        'db_name' => 'sagarpa',
         'db_charset' => 'utf8',
         'db_collation' => 'utf8_general_ci',
         'db_prefix' => ''
@@ -50,24 +50,6 @@ $app->get('/admin/users/add', array('Controller\User', "add"));
 $app->get('/admin/users/edit/@id', array('Controller\User', "edit"));
 $app->post('/admin/users/save', array('Controller\User', "save"));
 $app->any('/admin/users/delete(/@id)', array('Controller\User', "delete"));
-//pacientes
-$app->get('/admin/paciente', array('Controller\Paciente', "index"));
-$app->get('/admin/paciente/add', array('Controller\Paciente', "add"));
-$app->get('/admin/paciente/edit(/@id)', array('Controller\Paciente', "edit"));
-$app->post('/admin/paciente/save', array('Controller\Paciente', "save"));
-$app->any('/admin/paciente/delete(/@id)', array('Controller\Paciente', "delete"));
-//servicio
-$app->get('/admin/servicio', array('Controller\Servicio', "index"));
-$app->get('/admin/servicio/add', array('Controller\Servicio', "add"));
-$app->get('/admin/servicio/edit(/@id)', array('Controller\Servicio', "edit"));
-$app->post('/admin/servicio/save', array('Controller\Servicio', "save"));
-$app->any('/admin/servicio/delete(/@id)', array('Controller\Servicio', "delete"));
-//sala
-$app->get('/admin/sala', array('Controller\Sala', "index"));
-$app->get('/admin/sala/add', array('Controller\Sala', "add"));
-$app->get('/admin/sala/edit(/@id)', array('Controller\Sala', "edit"));
-$app->post('/admin/sala/save', array('Controller\Sala', "save"));
-$app->any('/admin/sala/delete(/@id)', array('Controller\Sala', "delete"));
 //personal
 $app->get('/admin/personal', array('Controller\Personal', "index"));
 $app->get('/admin/personal/add', array('Controller\Personal', "add"));

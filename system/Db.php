@@ -1,12 +1,11 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: Ariel
  * Date: 3/16/2017
  * Time: 10:14 AM
  */
-
-
 class Db
 {
     // PDO instance
@@ -667,9 +666,9 @@ class Db
     public function error($message = null)
     {
         $err = '<div style="border: 1px solid #ccc; padding: 10px;">'
-            . '<p>DB HATASI: </p>'
-            . '<p><b>SORGU:</b> "' . $this->last_query() . '"</p>'
-            . '<p><b>HATA:</b> ' . $message . '</p>'
+            . '<p>DB: </p>'
+            . '<p><b>QUERY:</b> "' . $this->last_query() . '"</p>'
+            . '<p><b>MESSAGE:</b> ' . $message . '</p>'
             . '</div>';
         die($err);
     }
@@ -681,5 +680,24 @@ class Db
     function __destruct()
     {
         $this->pdo = null;
+    }
+
+
+    public function arrayForSelect($table, $value, $key = 'id')
+    {
+        $select = is_string($value) ? implode(',', array($key, $value)) : '*';
+        $this->select($select)->from($table);
+        if (is_string($value)) {
+            $this->order_by($value, 'asc');
+        }
+        $arr = $this->get()->results();
+        $keys = array_map(function ($element) use ($key) {
+            return $element->$key;
+        }, $arr);
+        $values = $value instanceof Closure ? array_map($value, $arr) : array_map(function ($element) use ($value) {
+            return $element->$value;
+        }, $arr);
+        $arr = array_combine($keys, $values);
+        return $arr;
     }
 }

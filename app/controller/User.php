@@ -11,14 +11,14 @@ class User extends AdminController
 {
     public function index()
     {
-        $records = $this->db->get('usuarios')->results();
+        $records = $this->db->get('usuario')->results();
         render('admin/user/list', compact('records'));
     }
 
     public function delete($id)
     {
         if ($this->request->isPost()) {
-            $this->db->where('id', $this->request->data->id)->delete('usuarios');
+            $this->db->where('id', $this->request->data->id)->delete('usuario');
             $this->flash->success("Los datos fueron eliminados");
             $this->url->redirect('admin/users');
         } else {
@@ -28,7 +28,7 @@ class User extends AdminController
 
     public function edit($id)
     {
-        $model = $this->db->where('id', $id)->get('usuarios')->row();
+        $model = $this->db->where('id', $id)->get('usuario')->row();
         $title = "Editar Usuario";
         render('admin/user/form', compact('model', 'title'));
     }
@@ -50,11 +50,11 @@ class User extends AdminController
         //$data['password'] = md5($data['password']);
         if (isset($id) && !empty($id)) {
             //update
-            $this->db->where('id', $id)->update('usuarios', $data);
+            $this->db->where('id', $id)->update('usuario', $data);
         } else {
             //save
             unset($data['id']);
-            $this->db->insert('usuarios', $data);
+            $this->db->insert('usuario', $data);
             $id = $this->db->insert_id();
         }
         $this->flash->success("Los datos fueron guardados");

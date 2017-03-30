@@ -15,16 +15,22 @@
                 </div>
             </div>
             <div class="col-sm-6">
-
-<!--                <div class="form-group">-->
-<!--                    <label>Password:</label>-->
-<!--                    <input name="password" type="password" placeholder="Enter email" class="form-control" required=""-->
-<!--                           aria-required="true" value="--><?php //echo $model->password; ?><!--">-->
-<!--                </div>-->
                 <div class="form-group">
                     <label>Email:</label>
                     <input name="email" type="email" placeholder="Enter email" class="form-control" required=""
                            aria-required="true" value="<?php echo $model->email; ?>">
+                </div>
+                <div class="form-group">
+                    <label>Personal:</label>
+                    <?php
+                    $options = app()->db->arrayForSelect('personal', function ($el) {
+                        return $el->nombre . ' ' . $el->apellido1 . ' ' . $el->apellido2;
+                    });
+                    echo app()->form->select('personal_id', $options, $model->personal_id, array(
+                        'class' => 'form-control',
+                        'aria-required' => 'true',
+                    ));
+                    ?>
                 </div>
 
             </div>

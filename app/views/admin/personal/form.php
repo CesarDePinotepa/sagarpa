@@ -4,60 +4,40 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label>RFC:</label>
-                    <input name="rfc" type="text" placeholder="Enter email" class="form-control" required=""
-                           aria-required="true" value="<?php echo $model->rfc; ?>">
-                </div>
-                <div class="form-group">
                     <label>Nombre:</label>
                     <input name="nombre" type="text" placeholder="Enter email" class="form-control" required=""
                            aria-required="true" value="<?php echo $model->nombre; ?>">
                 </div>
                 <div class="form-group">
                     <label>Apellido Paterno:</label>
-                    <input name="apaterno" type="text" placeholder="Enter email" class="form-control" required=""
-                           aria-required="true" value="<?php echo $model->apaterno; ?>">
+                    <input name="apellido1" type="text" placeholder="Enter email" class="form-control" required=""
+                           aria-required="true" value="<?php echo $model->apellido1; ?>">
                 </div>
                 <div class="form-group">
                     <label>Apellido Materno:</label>
-                    <input name="amaterno" type="text" placeholder="Enter email" class="form-control" required=""
-                           aria-required="true" value="<?php echo $model->amaterno; ?>">
-                </div>
-                <div class="form-group">
-                    <label>Estado Civil:</label>
-                    <input name="edoCivil" type="text" placeholder="Enter email" class="form-control" required=""
-                           aria-required="true" value="<?php echo $model->edoCivil; ?>">
+                    <input name="apellido2" type="text" placeholder="Enter email" class="form-control" required=""
+                           aria-required="true" value="<?php echo $model->apellido2; ?>">
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
+                    <label>RFC:</label>
+                    <input name="rfc" type="text" placeholder="Enter email" class="form-control" required=""
+                           aria-required="true" value="<?php echo $model->rfc; ?>">
+                </div>
+                <div class="form-group">
+                    <label>CURP:</label>
+                    <input name="curp" type="text" placeholder="Enter email" class="form-control" required=""
+                           aria-required="true" value="<?php echo $model->curp; ?>">
+                </div>
+                <div class="form-group">
                     <label>Tipo:</label>
-                    <select class="form-control" required name="tipo">
-                        <option value="1" <?php echo $model->tipo == 1 ? 'selected' : ''; ?>>Normal</option>
-                        <option value="2" <?php echo $model->tipo == 2 ? 'selected' : ''; ?>>Medico</option>
+                    <select class="form-control" required name="puesto">
+                        <option value="j" <?php echo $model->puesto == 'j' ? 'selected' : ''; ?>>Jefe de Oficina
+                        </option>
+                        <option value="t" <?php echo $model->puesto == 't' ? 'selected' : ''; ?>>Técnico</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label>Telefono:</label>
-                    <input name="telefono" type="text" placeholder="Enter email" class="form-control" required=""
-                           aria-required="true" value="<?php echo $model->telefono; ?>">
-                </div>
-                <div class="form-group">
-                    <label>Especialidad:</label>
-                    <input name="especialidad" type="text" placeholder="Enter email" class="form-control" required=""
-                           aria-required="true" value="<?php echo $model->especialidad; ?>">
-                </div>
-                <div class="form-group">
-                    <label>Escuela de Procedencia:</label>
-                    <input name="escuela" type="text" placeholder="Enter email" class="form-control" required=""
-                           aria-required="true" value="<?php echo $model->escuela; ?>">
-                </div>
-                <div class="form-group">
-                    <label>Experiencia en Años:</label>
-                    <input name="experiencia" type="number" placeholder="Enter email" class="form-control" required=""
-                           aria-required="true" value="<?php echo $model->experiencia; ?>">
-                </div>
-
             </div>
             <div class="col-sm-12">
                 <div class="form-group">

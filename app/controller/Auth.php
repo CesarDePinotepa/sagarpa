@@ -1,4 +1,5 @@
 <?php
+
 namespace Controller;
 
 /**
@@ -38,14 +39,14 @@ class Auth extends Controller
 
     public function forgotPost()
     {
-        $user = $this->db->where('email', $this->request->data->email)->get('usuarios')->row();
+        $user = $this->db->where('email', $this->request->data->email)->get('usuario')->row();
         if ($user == null) {
             $this->flash->error("No existe el usuario");
         }
         $key = $this->auth->forgot($user->id);
         //send email
         $msg = '<a href="' . route('/change/' . $key) . '" >Siga este enlace para cambiar su contraseña</a>';
-        //mail($user->email, "Change password", $msg);
+        @mail($user->email, "Change password", $msg);
 
         $this->url->redirect('/login');
 
@@ -53,7 +54,7 @@ class Auth extends Controller
 
     public function change($key)
     {
-        $user = $this->db->where('passwordrecovery', $key)->get('usuarios')->row();
+        $user = $this->db->where('passwordrecovery', $key)->get('usuario')->row();
         if ($user == null) {
             $this->flash->success("Este link expiró.");
             $this->url->redirect('/login');
@@ -70,12 +71,12 @@ class Auth extends Controller
             $this->flash->error("Las contrasseñas deben coincidir");
             $this->url->redirect('/change/' . $key);
         }
-        $user = $this->db->where('passwordrecovery', $key)->get('usuarios')->row();
+        $user = $this->db->where('passwordrecovery', $key)->get('usuario')->row();
         $data = array(
             'passwordrecovery' => null,
             'password' => md5($pass)
         );
-        app()->db->where('id', $user->id)->update('usuarios', $data);
+        app()->db->where('id', $user->id)->update('usuario', $data);
         $this->flash->success("Su contraseña fue cambiada correctamente");
         $this->url->redirect('/login');
     }

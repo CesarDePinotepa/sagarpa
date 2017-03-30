@@ -10,21 +10,19 @@
                     <!--                                                        <td class="client-avatar"><img alt="image" src="img/a2.jpg"> </td>-->
                     <td>
                         <a href="<?php echo route('admin/personal/edit/' . $record->id); ?>"
-                           class="client-link"><?php echo $record->nombre . " " . $record->apaterno . ' ' . $record->amaterno; ?></a>
+                           class="client-link"><?php echo $record->nombre . " " . $record->apellido1 . ' ' . $record->apellido2; ?></a>
                     </td>
-                    <td> <?php echo $record->telefono; ?></td>
-                    <td class="contact-type"><i class="fa fa-envelope"> </i>
-                    </td>
-
+                    <td> <?php echo $record->rfc; ?></td>
+                    <td> <?php echo $record->curp; ?></td>
                     <td><?php
-                        switch ($record->tipo) {
-                            case 1: {
-                                echo "Normal";
+                        switch ($record->puesto) {
+                            case 'j': {
+                                echo "Jefe de Oficina";
                                 break;
                             }
 
-                            case 2: {
-                                echo "Medico";
+                            case 't': {
+                                echo "Técnico";
                                 break;
                             }
                         }

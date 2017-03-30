@@ -4,7 +4,7 @@
 class Auth
 {
     protected $session;
-
+    protected $table = 'usuario';
     protected $user = null;
 
     /**
@@ -17,7 +17,7 @@ class Auth
 
     public function login($user, $pass)
     {
-        $record = app()->db->where('email', $user)->get('usuarios')->row();
+        $record = app()->db->where('email', $user)->get($this->table)->row();
 
         if ($record->password == md5($pass)) {
             $this->session->set('auth.login', true);
@@ -46,7 +46,7 @@ class Auth
         $data = array(
             'passwordrecovery' => $key
         );
-        app()->db->where('id', $id)->update('usuarios', $data);
+        app()->db->where('id', $id)->update($this->table, $data);
         return $key;
     }
 
@@ -54,7 +54,7 @@ class Auth
     {
         if ($this->user == null) {
             $id = $this->session->get('auth.user');
-            $this->user = app()->db->where('id', $id)->get('usuarios')->row();
+            $this->user = app()->db->where('id', $id)->get($this->table)->row();
         }
         return $this->user;
     }

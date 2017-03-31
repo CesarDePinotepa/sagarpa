@@ -6,6 +6,7 @@
     <title>SAGARPA</title>
     <link href="<?php echo asset("css/bootstrap.min.css"); ?>" rel="stylesheet">
     <link href="<?php echo asset("css/style.css"); ?>" rel="stylesheet">
+    <script src="<?php echo asset("js/jquery-2.1.1.js"); ?>"></script>
 </head>
 
 <body class="admin">

@@ -317,7 +317,7 @@ class Db
     {
         $in_list = '';
         foreach ($list as $element) {
-            $in_list .= $this->escape($element) . ',';
+            $in_list .= (is_string($element) ? $this->escape($element) : $element) . ',';
         }
         $in_list = '(' . rtrim($in_list, ',') . ')';
         $this->where($column, $in_list, ' NOT IN ', $logic);
@@ -395,6 +395,11 @@ class Db
             $this->sql .= $this->limit;
         }
     }
+
+    /* public function query($sql)
+     {
+         $this->pdo->query();
+     }*/
 
     /**
      * Fetch one row
@@ -573,10 +578,10 @@ class Db
             $this->statement = $this->sql;
             foreach ($this->where as $key => $value) {
                 if ($key == 0) {
-                    $this->statement .= $value['column'] . $value['mark'] . $this->escape($value['value']) . ' ';
+                    $this->statement .= $value['column'] . $value['mark'] . $value['value'] . ' ';
                     $this->sql .= $value['column'] . $value['mark'] . '? ';
                 } else {
-                    $this->statement .= $value['logic'] . ' ' . $value['column'] . $value['mark'] . $this->escape($value['value']) . ' ';
+                    $this->statement .= $value['logic'] . ' ' . $value['column'] . $value['mark'] . $value['value'] . ' ';//this->escape($value['value'])
                     $this->sql .= $value['logic'] . ' ' . $value['column'] . $value['mark'] . '? ';
                 }
                 $val[] = $value['value'];
@@ -585,8 +590,10 @@ class Db
             $this->statement = rtrim($this->statement);
         }
         try {
-            $query = $this->pdo->prepare($this->sql);
-            $delete = $query->execute($val);
+//            $query = $this->pdo->prepare($this->sql);
+//            $delete = $query->execute($val);
+            $query = $this->pdo->query($this->statement);
+            $delete = $query->fetchAll();
 
             // Reset
             $this->reset();

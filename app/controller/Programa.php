@@ -54,16 +54,20 @@ class Programa extends AdminController
     public function edit($id)
     {
         $model = $this->db->where('id', $id)->get('programa')->row();
+        $requisitos = $this->db->where('programa_id', $id)->get('requisito')->results();
+        $componentes = $this->db->where('programa_id', $id)->get('componente')->results();
         $title = "Editar Programa";
         $tipos = $this->tipos;
         $tipoPersonas = $this->tipoPersonas;
-        render('admin/programa/form', compact('model', 'title', 'tipos', 'tipoPersonas'));
+        render('admin/programa/form', compact('model', 'title', 'tipos', 'tipoPersonas', 'requisitos', 'componentes'));
     }
 
     public function add()
     {
         $title = "Nuevo Programa";
         $model = new \Dummy();
+        $requisitos = array();
+        $componentes = array();
         $tipos = $this->tipos;
         $tipoPersonas = $this->tipoPersonas;
         render('admin/programa/form', compact('model', 'title', 'tipos', 'tipoPersonas'));
@@ -95,12 +99,57 @@ class Programa extends AdminController
         if (isset($id) && !empty($id)) {
             //update
             $this->db->where('id', $id)->update('programa', $data);
+
         } else {
             //save
             unset($data['id']);
             $this->db->insert('programa', $data);
             $id = $this->db->insert_id();
         }
+        //salvando requisitos
+        $reqs = $this->request->data->requisito;
+        //Elimino los q ya no estan
+        $this->db->not_in('id', array_map('intval', array_keys($reqs)));
+        $this->db->where('programa_id', $id);
+        $this->db->delete('requisito');
+        //actualizo o guardo segun sea el caso
+        foreach ($reqs as $key => $req) {
+            $data = array(
+                'nombre' => $req['nombre'],
+                'tipo' => $req['tipo']
+            );
+            if ($key > 0) {
+                $this->db->where('id', $key);
+                $this->db->update('requisito', $data);
+            } else {
+                $data['programa_id'] = $id;
+                $this->db->insert('requisito', $data);
+            }
+        }
+
+
+        //salvando componentes
+        $reqs = $this->request->data->componente;
+        //Elimino los q ya no estan
+        $this->db->not_in('id', array_map('intval', array_keys($reqs)));
+        $this->db->where('programa_id', $id);
+        $this->db->delete('componente');
+        //actualizo o guardo segun sea el caso
+        foreach ($reqs as $key => $req) {
+            $data = array(
+                'nombre_componente' => $req['nombre_componente'],
+                'subconceptos' => $req['subconceptos']
+            );
+            if ($key > 0) {
+                $this->db->where('id', $key);
+                $this->db->update('componente', $data);
+            } else {
+                $data['programa_id'] = $id;
+                $this->db->insert('componente', $data);
+            }
+        }
+
+
         $this->flash->success("Los datos fueron guardados");
         //$this->edit($id);
         $this->url->redirect('admin/programa/edit/' . $id);

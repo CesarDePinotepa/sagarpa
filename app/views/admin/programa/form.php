@@ -71,6 +71,85 @@
                            aria-required="true" value="<?php echo $model->beneficio; ?>">
                 </div>
             </div>
+            <div class="col-sm-6">
+                <label>Requisitos:</label>
+                <div class="" style="padding-bottom: 10px;">
+                    <a href="#add-req" class="btn btn-xs btn-default">Nuevo requisito</a>
+                </div>
+                <div class="list-requisito">
+                    <?php $tipoRequisito = array(
+                        '1' => "Requisito 1",
+                        '2' => "Requisito 2",
+                    ); ?>
+                    <?php if (empty($requisitos)) {
+                        $dummy = new Dummy();
+                        $dummy->id = 0;
+                        $requisitos[] = $dummy;
+                    } ?>
+                    <?php foreach ($requisitos as $req): ?>
+                        <div class="row row-list">
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <input name="requisito[<?php echo $req->id; ?>][nombre]" type="text"
+                                           placeholder="Enter email" class="form-control req-nombre"
+                                           required="" aria-required="true" value="<?php echo $req->nombre; ?>">
+                                </div>
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <?php
+                                    echo app()->form->select('requisito[' . $req->id . '][tipo]', $tipoRequisito, $req->tipo, array(
+                                        'required' => true,
+                                        'class' => 'form-control req-tipo'
+                                    ));
+                                    ?>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <a href="#del-req" class="btn btn-xs btn-danger" style="margin-top: 6px;">Eliminar</a>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <label>Componentes:</label>
+                <div class="" style="padding-bottom: 10px;">
+                    <a href="#add-comp" class="btn btn-xs btn-default">Nuevo componente</a>
+                </div>
+                <div class="list-componente">
+                    <?php if (empty($componentes)) {
+                        $dummy = new Dummy();
+                        $dummy->id = 0;
+                        $componentes[] = $dummy;
+                    } ?>
+                    <?php foreach ($componentes as $comp): ?>
+                        <div class="row row-list">
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <input name="componente[<?php echo $comp->id; ?>][nombre_componente]" type="text"
+                                           placeholder="Enter email" class="form-control comp-nombre_componente"
+                                           required="" aria-required="true"
+                                           value="<?php echo $comp->nombre_componente; ?>">
+                                </div>
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <input name="componente[<?php echo $comp->id; ?>][subconceptos]" type="text"
+                                               placeholder="Enter email" class="form-control comp-subconceptos"
+                                               required="" aria-required="true"
+                                               value="<?php echo $comp->subconceptos; ?>">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <a href="#del-comp" class="btn btn-xs btn-danger" style="margin-top: 6px;">Eliminar</a>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
             <div class="col-sm-12">
                 <div class="text-right">
                     <a class="btn btn-sm btn-default m-t-n-xs" href="<?php echo route('admin/programa') ?>">
@@ -83,4 +162,30 @@
             </div>
         </div>
     </form>
+    <script>
+        $(function () {
+            var counter = -1000;
+            var line = $('.list-requisito > .row-list').first().clone();
+            var lineComp = $('.list-componente > .row-list').first().clone();
+            $(document).on('click', 'a[href="#del-req"], a[href="#del-comp"]', function () {
+                $(this).parents('.row-list').remove();
+            });
+            $('a[href="#add-req"]').click(function () {
+                var newline = line.clone();
+                counter++;
+                newline.find('.req-nombre').attr('name', 'requisito[' + counter + '][nombre]');
+                newline.find('.req-tipo').attr('name', 'requisito[' + counter + '][tipo]');
+                newline.find('input').val('');
+                $('.list-requisito').append(newline);
+            });
+            $('a[href="#add-comp"]').click(function () {
+                var newline = lineComp.clone();
+                counter++;
+                newline.find('.comp-nombre_componente').attr('name', 'componente[' + counter + '][nombre_componente]');
+                newline.find('.comp-subconceptos').attr('name', 'componente[' + counter + '][subconceptos]');
+                newline.find('input').val('');
+                $('.list-componente').append(newline);
+            });
+        })
+    </script>
 <?php echo render('common/admin/footer'); ?>

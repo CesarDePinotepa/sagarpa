@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 100119
 File Encoding         : 65001
 
-Date: 2017-03-30 13:54:44
+Date: 2017-03-30 17:11:41
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -69,16 +69,19 @@ DROP TABLE IF EXISTS `componente`;
 CREATE TABLE `componente` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre_componente` varchar(15) NOT NULL,
-  `suboconceptos` varchar(45) NOT NULL,
+  `subconceptos` varchar(45) NOT NULL,
   `programa_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_conceptos_programas1_idx` (`programa_id`),
-  CONSTRAINT `fk_conceptos_programas1` FOREIGN KEY (`programa_id`) REFERENCES `programa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  CONSTRAINT `fk_conceptos_programas1` FOREIGN KEY (`programa_id`) REFERENCES `programa` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of componente
 -- ----------------------------
+INSERT INTO `componente` VALUES ('2', 'asda', 'sdasd', '2');
+INSERT INTO `componente` VALUES ('4', 'asdasasdasd', 'dasdasdasdasd', '2');
+INSERT INTO `componente` VALUES ('6', 'asdasd', 'asdasd', '2');
 
 -- ----------------------------
 -- Table structure for personal
@@ -116,13 +119,12 @@ CREATE TABLE `programa` (
   `monto` decimal(11,2) DEFAULT NULL,
   `beneficio` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of programa
 -- ----------------------------
-INSERT INTO `programa` VALUES ('1', 'as', 'd', 'a', 'asdasd', '21231344', '0.57', 'asdasd');
-INSERT INTO `programa` VALUES ('2', 'asdasdasd', 'a', 'f', 'zadeh19881.pdf', '34', '55.00', 'asdasdasd');
+INSERT INTO `programa` VALUES ('2', 'asdasdasd', 'a', 'f', 'zadeh19881.pdf', '343', '55.00', 'asdasdasd');
 
 -- ----------------------------
 -- Table structure for requisito
@@ -135,12 +137,15 @@ CREATE TABLE `requisito` (
   `tipo` char(1) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_requisitos_programas1_idx` (`programa_id`),
-  CONSTRAINT `fk_requisitos_programas1` FOREIGN KEY (`programa_id`) REFERENCES `programa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  CONSTRAINT `fk_requisitos_programas1` FOREIGN KEY (`programa_id`) REFERENCES `programa` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of requisito
 -- ----------------------------
+INSERT INTO `requisito` VALUES ('1', '2', 'a', '2');
+INSERT INTO `requisito` VALUES ('6', '2', 'aaaaa', '2');
+INSERT INTO `requisito` VALUES ('8', '2', 'adxcxzczxczxc', '2');
 
 -- ----------------------------
 -- Table structure for requisito_cumplido
